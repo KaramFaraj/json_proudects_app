@@ -1,4 +1,7 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
 
 class ProductModel {
   num id;
@@ -7,7 +10,9 @@ class ProductModel {
   num price;
   num rating;
   String brand;
+  String category;
   String thumbnail;
+  List<String> images;
   ProductModel({
     required this.id,
     required this.title,
@@ -15,7 +20,9 @@ class ProductModel {
     required this.price,
     required this.rating,
     required this.brand,
+    required this.category,
     required this.thumbnail,
+    required this.images,
   });
 
   ProductModel copyWith({
@@ -25,7 +32,9 @@ class ProductModel {
     num? price,
     num? rating,
     String? brand,
+    String? category,
     String? thumbnail,
+    List<String>? images,
   }) {
     return ProductModel(
       id: id ?? this.id,
@@ -34,7 +43,9 @@ class ProductModel {
       price: price ?? this.price,
       rating: rating ?? this.rating,
       brand: brand ?? this.brand,
+      category: category ?? this.category,
       thumbnail: thumbnail ?? this.thumbnail,
+      images: images ?? this.images,
     );
   }
 
@@ -46,7 +57,9 @@ class ProductModel {
       'price': price,
       'rating': rating,
       'brand': brand,
+      'category': category,
       'thumbnail': thumbnail,
+      'images': images,
     };
   }
 
@@ -58,41 +71,49 @@ class ProductModel {
       price: map['price'] as num,
       rating: map['rating'] as num,
       brand: map['brand'] as String,
+      category: map['category'] as String,
       thumbnail: map['thumbnail'] as String,
+      images: List<String>.from(
+        (map['images'] as List<String>),
+      ),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory ProductModel.fromJson(String source) => ProductModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory ProductModel.fromJson(String source) =>
+      ProductModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
-    return 'ProductModel(id: $id, title: $title, description: $description, price: $price, rating: $rating, brand: $brand, thumbnail: $thumbnail)';
+    return 'ProductModel(id: $id, title: $title, description: $description, price: $price, rating: $rating, brand: $brand, category: $category, thumbnail: $thumbnail, images: $images)';
   }
 
   @override
   bool operator ==(covariant ProductModel other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.id == id &&
-      other.title == title &&
-      other.description == description &&
-      other.price == price &&
-      other.rating == rating &&
-      other.brand == brand &&
-      other.thumbnail == thumbnail;
+
+    return other.id == id &&
+        other.title == title &&
+        other.description == description &&
+        other.price == price &&
+        other.rating == rating &&
+        other.brand == brand &&
+        other.category == category &&
+        other.thumbnail == thumbnail &&
+        listEquals(other.images, images);
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-      title.hashCode ^
-      description.hashCode ^
-      price.hashCode ^
-      rating.hashCode ^
-      brand.hashCode ^
-      thumbnail.hashCode;
+        title.hashCode ^
+        description.hashCode ^
+        price.hashCode ^
+        rating.hashCode ^
+        brand.hashCode ^
+        category.hashCode ^
+        thumbnail.hashCode ^
+        images.hashCode;
   }
 }
