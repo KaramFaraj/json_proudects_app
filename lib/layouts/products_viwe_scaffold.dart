@@ -5,38 +5,29 @@ import 'package:json_proudects_app/model/product_model.dart';
 
 class ProductsViewScaffold extends StatelessWidget {
   final List<ProductModel> productsDataList;
-  final List<ProductModel> products;
 
   ProductsViewScaffold({
-    Key? key,
+    super.key,
     required this.productsDataList,
-    required this.products,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         SizedBox(
-          height: 500,
-          child: ListView.builder(
-            itemCount: products.length,
+          height: 450,
+          child: GridView.builder(
+            itemCount: productsDataList.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisExtent: 240,
+              crossAxisSpacing: 20,
+              childAspectRatio: 4 / 2,
+              mainAxisSpacing: 40,
+            ),
             itemBuilder: (context, index) {
-              return Expanded(
-                child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisExtent: 253,
-                    crossAxisSpacing: 20,
-                    childAspectRatio: 4 / 2,
-                    mainAxisSpacing: 40,
-                  ),
-                  itemBuilder: (context, index) {
-                    final products = productsDataList[index];
-                    return ProductCard(products: products);
-                  },
-                ),
-              );
+              return ProductCard(products: productsDataList[index]);
             },
           ),
         )

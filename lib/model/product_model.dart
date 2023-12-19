@@ -12,7 +12,7 @@ class ProductModel {
   String brand;
   String category;
   String thumbnail;
-  List<String> images;
+  List images;
   ProductModel({
     required this.id,
     required this.title,
@@ -34,7 +34,7 @@ class ProductModel {
     String? brand,
     String? category,
     String? thumbnail,
-    List<String>? images,
+    List? images,
   }) {
     return ProductModel(
       id: id ?? this.id,
@@ -73,8 +73,8 @@ class ProductModel {
       brand: map['brand'] as String,
       category: map['category'] as String,
       thumbnail: map['thumbnail'] as String,
-      images: List<String>.from(
-        (map['images'] as List<String>),
+      images: List.from(
+        (map['images'] as List),
       ),
     );
   }

@@ -8,13 +8,12 @@ abstract class BaseProductsService {
 
 abstract class ProductsService extends BaseProductsService {
   Future getAllProduct();
-  
 }
 
 class ProductsServiceImp extends ProductsService {
   @override
   Future getAllProduct() async {
     response = await dio.get(baseproducturl);
-    return response;
+    return response.data;
   }
 }

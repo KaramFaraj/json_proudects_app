@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:json_proudects_app/layouts/products_viwe_scaffold.dart';
+import 'package:json_proudects_app/model/product_model.dart';
 import '../service/product_service.dart';
 
 class HomePage extends StatelessWidget {
@@ -26,12 +27,13 @@ class HomePage extends StatelessWidget {
           builder: (context, status) {
             if (status.hasData) {
               dynamic temp = status.data;
-              
+              List<ProductModel> products = List.generate(temp['products'].length,
+                  (index) => ProductModel.fromMap(temp['products'][index]));
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding:EdgeInsets.only(top: 8.0),
                     child: const Text(
                       'Hello',
                       style: TextStyle(
@@ -53,7 +55,7 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                   const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                     child: SizedBox(
                       width: double.maxFinite,
                       child: TextField(
@@ -77,8 +79,7 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                   ProductsViewScaffold(
-                    productsDataList: temp,
-                    products: temp,
+                    productsDataList: products,
                   )
                 ],
               );
