@@ -17,8 +17,4 @@ class ProductsServiceImp extends ProductsService {
     response = await dio.get(baseproducturl);
     return response;
   }
-  // @override
-  // Future SearchProuducts() async {
-  //   response = await dio.get('$baseproducturl+search?q=sear');
-  // }
 }
