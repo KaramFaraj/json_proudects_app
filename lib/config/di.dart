@@ -6,9 +6,3 @@ GetIt config = GetIt.instance;
 setup() async {
   config.registerSingleton(await SharedPreferences.getInstance());
 }
-
-// GetIt layout = GetIt.instance;
-
-// layouts() async {
-//   layout.
-// }
